@@ -64,7 +64,10 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({route}) => {
 
   return (
     <View style={styles.container}>
-      <CustomHeader title="Product Details" onBackPress={() => navigation.goBack()} />
+      <CustomHeader
+        title="Product Details"
+        onBackPress={() => navigation.goBack()}
+      />
 
       <CustomFastImage uri={product?.images[0]} style={styles.image} />
 

@@ -7,10 +7,8 @@ import React, {
 } from 'react';
 import auth from '@react-native-firebase/auth';
 import Toast from 'react-native-toast-message';
-import {useNavigation} from '@react-navigation/native';
 import {REMOVE_TOKEN} from '../redux/reducers/tokenReducer';
 import {useDispatch} from 'react-redux';
-import {persistor} from '../redux/store/store';
 import {handleError} from '../Utils/errorHandler';
 
 interface AuthContextProps {
@@ -46,13 +44,20 @@ export const AuthProvider: React.FC<{children: React.ReactNode}> = ({
         });
         return response;
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('Signup error:', error);
       Toast.show({
         type: 'error',
         text1: 'Signup Failed',
         text2: error?.message || 'Something went wrong!',
       });
+      if (error?.response) {
+        console.log('Server Error:', error?.response?.data);
+      } else if (error?.request) {
+        console.error('Network Error: No response received', error?.request);
+      } else {
+        console.error('Unexpected Error:', error?.message);
+      }
     } finally {
       setLoading(false);
     }
@@ -76,25 +81,24 @@ export const AuthProvider: React.FC<{children: React.ReactNode}> = ({
         });
         return response;
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('Signup error:', error);
       Toast.show({
         type: 'error',
         text1: 'Signup Failed',
         text2: error?.message || 'Something went wrong!',
       });
+      if (error?.response) {
+        console.log('Server Error:', error?.response?.data);
+      } else if (error?.request) {
+        console.error('Network Error: No response received', error?.request);
+      } else {
+        console.error('Unexpected Error:', error?.message);
+      }
     } finally {
       setLoading(false);
     }
   };
-
-  useEffect(() => {
-    // const unsubscribe = auth().onAuthStateChanged(currentUser => {
-    //   setUser(currentUser);
-    //   setLoading(false);
-    // });
-    // return unsubscribe;
-  }, []);
 
   const logout = useCallback(async () => {
     setLoading(true);

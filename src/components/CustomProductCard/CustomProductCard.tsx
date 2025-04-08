@@ -1,5 +1,11 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  ImageStyle,
+} from 'react-native';
 import CustomFastImage from '../CustomFastImage/CustomFastImage';
 import {
   addToCart,
@@ -9,7 +15,30 @@ import {
 import {useDispatch} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
 
-const CustomProductCard = ({item, itemInCart}) => {
+interface Product {
+  id: number;
+  title: string;
+  price: number;
+  images: string[];
+}
+
+interface CartItem {
+  id: number;
+  name: string;
+  price: number;
+  quantity: number;
+  image: string;
+}
+
+interface CustomProductCardProps {
+  item: Product;
+  itemInCart?: CartItem;
+}
+
+const CustomProductCard: React.FC<CustomProductCardProps> = ({
+  item,
+  itemInCart,
+}) => {
   const dispatch = useDispatch();
   const navigation = useNavigation<any>();
 
@@ -52,40 +81,38 @@ const CustomProductCard = ({item, itemInCart}) => {
   };
 
   return (
-    <>
-      <TouchableOpacity style={styles.productCard} onPress={handleNavigate}>
-        <CustomFastImage
-          uri={item?.images[0]}
-          style={{width: 120, height: 90}}
-        />
-        <Text style={styles.productName} numberOfLines={2}>
-          {item?.title}
-        </Text>
-        <Text style={styles.productPrice}>₹{item?.price}</Text>
+    <TouchableOpacity style={styles.productCard} onPress={handleNavigate}>
+      <CustomFastImage
+        uri={item?.images[0]}
+        style={{width: 120, height: 90} as ImageStyle}
+      />
+      <Text style={styles.productName} numberOfLines={2}>
+        {item?.title}
+      </Text>
+      <Text style={styles.productPrice}>₹{item?.price}</Text>
 
-        {itemInCart ? (
-          <View style={styles.quantityContainer}>
-            <TouchableOpacity
-              onPress={() => handleDecreaseQuantity(item)}
-              style={styles.quantityButton}>
-              <Text style={styles.quantityText}>-</Text>
-            </TouchableOpacity>
-            <Text style={styles.quantityText}>{itemInCart.quantity}</Text>
-            <TouchableOpacity
-              onPress={() => handleAddToCart(item)}
-              style={styles.quantityButton}>
-              <Text style={styles.quantityText}>+</Text>
-            </TouchableOpacity>
-          </View>
-        ) : (
+      {itemInCart ? (
+        <View style={styles.quantityContainer}>
+          <TouchableOpacity
+            onPress={() => handleDecreaseQuantity(item)}
+            style={styles.quantityButton}>
+            <Text style={styles.quantityText}>-</Text>
+          </TouchableOpacity>
+          <Text style={styles.quantityText}>{itemInCart.quantity}</Text>
           <TouchableOpacity
             onPress={() => handleAddToCart(item)}
-            style={styles.addToCartButton}>
-            <Text style={styles.addToCartText}>Add to Cart</Text>
+            style={styles.quantityButton}>
+            <Text style={styles.quantityText}>+</Text>
           </TouchableOpacity>
-        )}
-      </TouchableOpacity>
-    </>
+        </View>
+      ) : (
+        <TouchableOpacity
+          onPress={() => handleAddToCart(item)}
+          style={styles.addToCartButton}>
+          <Text style={styles.addToCartText}>Add to Cart</Text>
+        </TouchableOpacity>
+      )}
+    </TouchableOpacity>
   );
 };
 
@@ -124,22 +151,24 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     borderRadius: 5,
   },
-  addToCartText: {color: '#fff', fontWeight: 'bold'},
+  addToCartText: {
+    color: '#fff',
+    fontWeight: 'bold',
+  },
   quantityContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     marginTop: 10,
-    gap:10
+    gap: 10,
   },
   quantityButton: {
     borderRadius: 6,
-    width:30,
-    height:27,
-    justifyContent:'center',
-    alignItems:'center',
-    borderWidth:0.5,
-    borderColor:'#ccc',
-    
+    width: 30,
+    height: 27,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 0.5,
+    borderColor: '#ccc',
   },
   quantityText: {
     color: '#000',

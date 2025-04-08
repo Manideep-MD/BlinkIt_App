@@ -1,11 +1,5 @@
 import React, {useState} from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Modal,
-  Pressable,
-} from 'react-native';
+import {View, Text, TouchableOpacity, Modal, Pressable} from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useDispatch, useSelector} from 'react-redux';
@@ -13,7 +7,7 @@ import {RootState} from '../../redux/store/store';
 import {useAuth} from '../../context/AuthContext';
 import {useNavigation} from '@react-navigation/native';
 import styles from './style';
-import { clearCart } from '../../redux/reducers/cartReducer';
+import {clearCart} from '../../redux/reducers/cartReducer';
 
 const BlinkitHeader = () => {
   const cartLength = useSelector((state: RootState) => state.cart.items);
@@ -25,7 +19,7 @@ const BlinkitHeader = () => {
   const handleLogout = async () => {
     setShowLogoutModal(false);
     dispatch(clearCart());
-    await logout(); 
+    await logout();
   };
 
   const handleCart = () => {

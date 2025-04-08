@@ -1,5 +1,5 @@
-import React, { forwardRef, useImperativeHandle, useState } from 'react';
-import { View, Text, Modal, TouchableOpacity, StyleSheet } from 'react-native';
+import React, {forwardRef, useImperativeHandle, useState} from 'react';
+import {View, Text, Modal, TouchableOpacity, StyleSheet} from 'react-native';
 
 const CustomBottomSheet = forwardRef((props, ref) => {
   const [visible, setVisible] = useState(false);
@@ -24,9 +24,23 @@ const CustomBottomSheet = forwardRef((props, ref) => {
 });
 
 const styles = StyleSheet.create({
-  overlay: { flex: 1, backgroundColor: 'rgba(0,0,0,0.5)', justifyContent: 'flex-end' },
-  sheet: { backgroundColor: '#fff', padding: 20, borderTopLeftRadius: 10, borderTopRightRadius: 10 },
-  closeText: { textAlign: 'center', fontSize: 18, color: 'red', marginBottom: 10 },
+  overlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    justifyContent: 'flex-end',
+  },
+  sheet: {
+    backgroundColor: '#fff',
+    padding: 20,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+  },
+  closeText: {
+    textAlign: 'center',
+    fontSize: 18,
+    color: 'red',
+    marginBottom: 10,
+  },
 });
 
 export default CustomBottomSheet;

@@ -1,6 +1,12 @@
 import React from 'react';
 import FastImage from 'react-native-fast-image';
-import { StyleSheet, View, ActivityIndicator, ViewStyle, ImageStyle } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  ActivityIndicator,
+  ViewStyle,
+  ImageStyle,
+} from 'react-native';
 
 interface CustomFastImageProps {
   uri: string;
@@ -8,18 +14,20 @@ interface CustomFastImageProps {
   resizeMode?: 'contain' | 'cover' | 'stretch' | 'center';
 }
 
-const CustomFastImage: React.FC<CustomFastImageProps> = ({ 
-  uri, 
-  style, 
-  resizeMode = 'contain' 
+const CustomFastImage: React.FC<CustomFastImageProps> = ({
+  uri,
+  style,
+  resizeMode = 'contain',
 }) => {
   const [loading, setLoading] = React.useState(true);
 
   return (
     <View style={[styles.container, style]}>
-      {loading && <ActivityIndicator size="small" color="#888" style={styles.loader} />}
+      {loading && (
+        <ActivityIndicator size="small" color="#888" style={styles.loader} />
+      )}
       <FastImage
-        source={{ uri }}
+        source={{uri}}
         style={[styles.image, style]}
         resizeMode={resizeMode as any}
         onLoadEnd={() => setLoading(false)}

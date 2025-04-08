@@ -11,7 +11,7 @@ import {useAuth} from '../../context/AuthContext';
 import {useDispatch} from 'react-redux';
 import {SET_TOKEN} from '../../redux/reducers/tokenReducer';
 import {useNavigation, NavigationProp} from '@react-navigation/native';
-import {RootStackParamList} from '../../navigation/types'; // update path if needed
+import {RootStackParamList} from '../../navigation/types'; 
 import {Formik} from 'formik';
 import * as Yup from 'yup';
 import {EMAIL_REGEX} from '../../constants/Regex';
@@ -37,8 +37,15 @@ const Login = () => {
         dispatch(SET_TOKEN(response?.user?._user?.uid));
         navigation.navigate('ProductList');
       }
-    } catch (error) {
+    } catch (error:any) {
       console.log(error, 'error---->');
+      if (error?.response) {
+        console.log('Server Error:', error?.response?.data);
+      } else if (error?.request) {
+        console.error('Network Error: No response received', error?.request);
+      } else {
+        console.error('Unexpected Error:', error?.message);
+      }
     }
   };
 

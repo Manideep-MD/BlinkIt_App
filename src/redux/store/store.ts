@@ -13,7 +13,6 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import tokenReducer from '../reducers/tokenReducer';
 import cartReducer from '../reducers/cartReducer';
-// import LoaderReducers from '../Reducers/LoaderReducers';
 
 const authPersistConfig = {
   key: 'auth',

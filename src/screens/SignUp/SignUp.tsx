@@ -12,13 +12,13 @@ import {useNavigation} from '@react-navigation/native';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
 import ErrorText from '../../components/ErrorText/ErrorText';
-import Loader from '../../components/Loader/Loader';
+import {EMAIL_REGEX} from '../../constants/Regex';
 
 const SignupSchema = Yup.object().shape({
-  email: Yup.string().email('Invalid email').required('Email is required'),
-  password: Yup.string()
-    .min(6, 'Password must be at least 6 characters')
-    .required('Password is required'),
+  email: Yup.string()
+    .matches(EMAIL_REGEX, 'Invalid email')
+    .required('Email is required'),
+  password: Yup.string().min(6, 'Too short').required('Password is required'),
 });
 
 const Signup = () => {
@@ -32,8 +32,15 @@ const Signup = () => {
         console.log('User signed up:', response.user);
         navigation.navigate('Login');
       }
-    } catch (error) {
+    } catch (error: any) {
       console.log(error, 'error---->');
+      if (error?.response) {
+        console.log('Server Error:', error?.response?.data);
+      } else if (error?.request) {
+        console.error('Network Error: No response received', error?.request);
+      } else {
+        console.error('Unexpected Error:', error?.message);
+      }
     }
   };
 
@@ -107,7 +114,6 @@ const Signup = () => {
           </Text>
         </TouchableOpacity>
       </View>
-      {loading && <Loader />}
     </>
   );
 };

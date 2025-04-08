@@ -34,7 +34,6 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
     );
 };
 
-// hook to use the theme
 export const useCustomTheme = () => {
     const context = useContext(ThemeContext);
     if (context === undefined) {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import {ScrollView, Text, TouchableOpacity, View} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from './styles';
 
@@ -9,8 +9,7 @@ interface Props {
   onCategorySelect: (category: string) => void;
 }
 
-// Map categories to MaterialCommunityIcons
-const categoryIconMap: { [key: string]: string } = {
+const categoryIconMap: {[key: string]: string} = {
   All: 'apps',
   Grocery: 'cart-outline',
   Fruits: 'fruit-cherries',
@@ -19,13 +18,17 @@ const categoryIconMap: { [key: string]: string } = {
   Drinks: 'cup-water',
 };
 
-const CategoryTabs: React.FC<Props> = ({ categories, selectedCategory, onCategorySelect }) => {
+const CategoryTabs: React.FC<Props> = ({
+  categories,
+  selectedCategory,
+  onCategorySelect,
+}) => {
   return (
     <ScrollView
       horizontal
       showsHorizontalScrollIndicator={false}
       contentContainerStyle={styles.tabContainer}>
-      {categories?.map((cat) => (
+      {categories?.map(cat => (
         <TouchableOpacity
           key={cat}
           onPress={() => onCategorySelect(cat)}
@@ -33,13 +36,13 @@ const CategoryTabs: React.FC<Props> = ({ categories, selectedCategory, onCategor
             styles.tabItem,
             selectedCategory === cat && styles.activeTabItem,
           ]}>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <View style={styles.emptyCart}>
             {categoryIconMap[cat] && (
               <MaterialCommunityIcons
                 name={categoryIconMap[cat]}
                 size={18}
                 color={selectedCategory === cat ? '#FFD700' : '#999'}
-                style={{ marginRight: 5 }}
+                style={{marginRight: 5}}
               />
             )}
             <Text

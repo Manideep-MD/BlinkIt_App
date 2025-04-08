@@ -1,5 +1,5 @@
 // redux/reducers/productReducer.ts
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
 interface Product {
   id: string;
@@ -25,7 +25,7 @@ const productSlice = createSlice({
   name: 'product',
   initialState,
   reducers: {
-    fetchProductsStart: (state) => {
+    fetchProductsStart: state => {
       state.loading = true;
       state.error = null;
     },
@@ -40,5 +40,6 @@ const productSlice = createSlice({
   },
 });
 
-export const { fetchProductsStart, fetchProductsSuccess, fetchProductsFailure } = productSlice.actions;
+export const {fetchProductsStart, fetchProductsSuccess, fetchProductsFailure} =
+  productSlice.actions;
 export default productSlice.reducer;

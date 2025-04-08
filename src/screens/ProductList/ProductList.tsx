@@ -15,7 +15,7 @@ import CartSummary from '../../components/CartSummary/CartSummary';
 import BlinkitHeader from '../../components/BlinkItHeader/BlinkItHeader';
 import CustomProductCard from '../../components/CustomProductCard/CustomProductCard';
 import CategoryTabs from '../../components/CategoryTabs/CategoryTabs';
-import { useAuth } from '../../context/AuthContext';
+import {useAuth} from '../../context/AuthContext';
 import Loader from '../../components/Loader/Loader';
 
 const categories = ['All', 'Fruits', 'Vegetables', 'Dairy', 'Beverages'];
@@ -24,10 +24,10 @@ const ProductList = () => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('All');
-  const [loading,setLoading] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(false);
   const cart = useSelector((state: RootState) => state.cart?.items || []);
   const navigation = useNavigation();
-  const {logout} = useAuth()
+  const {logout} = useAuth();
 
   useEffect(() => {
     handleProductList();
@@ -38,7 +38,7 @@ const ProductList = () => {
   }, [selectedCategory, products]);
 
   const handleProductList = async () => {
-    setLoading(true)
+    setLoading(true);
     try {
       const response = await fetchProducts();
       if (response) {
@@ -48,8 +48,8 @@ const ProductList = () => {
       }
     } catch (error) {
       console.log(error, 'Error fetching products');
-    }finally{
-      setLoading(false)
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -67,33 +67,31 @@ const ProductList = () => {
   const renderProducts = ({item}: any) => {
     const itemInCart = cart.find(cartItem => cartItem.id === item.id);
 
-    return (<CustomProductCard item={item} itemInCart={itemInCart} />);
+    return <CustomProductCard item={item} itemInCart={itemInCart} />;
   };
-
-
 
   return (
     <>
-    <View style={styles.container}>
-      <BlinkitHeader onLogout={logout} />
-      <View>
-        <CategoryTabs
-          categories={categories}
-          selectedCategory={selectedCategory}
-          onCategorySelect={setSelectedCategory}
+      <View style={styles.container}>
+        <BlinkitHeader onLogout={logout} />
+        <View>
+          <CategoryTabs
+            categories={categories}
+            selectedCategory={selectedCategory}
+            onCategorySelect={setSelectedCategory}
+          />
+        </View>
+        <FlatList
+          data={filteredProducts}
+          keyExtractor={item => item?.id?.toString()}
+          showsVerticalScrollIndicator={false}
+          numColumns={2}
+          renderItem={renderProducts}
+          contentContainerStyle={{paddingBottom: 100}}
         />
+        {cart.length > 0 && <CartSummary cart={cart} navigation={navigation} />}
       </View>
-      <FlatList
-        data={filteredProducts}
-        keyExtractor={item => item?.id?.toString()}
-        showsVerticalScrollIndicator={false}
-        numColumns={2}
-        renderItem={renderProducts}
-        contentContainerStyle={{paddingBottom: 100}}
-      />
-      {cart.length > 0 && <CartSummary cart={cart} navigation={navigation} />}
-    </View>
-    {loading && <Loader/>}
+      {loading && <Loader />}
     </>
   );
 };

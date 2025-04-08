@@ -1,11 +1,5 @@
-// components/CartItemCard.tsx
 import React from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-} from 'react-native';
+import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import CustomFastImage from '../CustomFastImage/CustomFastImage';
 
 interface Props {
@@ -18,7 +12,7 @@ interface Props {
   };
   onIncrease: (item: any) => void;
   onDecrease: (id: number) => void;
-};
+}
 
 const CartItemCard: React.FC<Props> = ({item, onIncrease, onDecrease}) => {
   return (
@@ -31,7 +25,9 @@ const CartItemCard: React.FC<Props> = ({item, onIncrease, onDecrease}) => {
         <Text style={styles.price}>₹{item.price}</Text>
       </View>
       <View style={styles.quantity}>
-        <TouchableOpacity onPress={() => onDecrease(item.id)} style={styles.btn}>
+        <TouchableOpacity
+          onPress={() => onDecrease(item.id)}
+          style={styles.btn}>
           <Text style={styles.btnText}>-</Text>
         </TouchableOpacity>
         <Text style={styles.qtyText}>{item.quantity}</Text>
@@ -89,13 +85,12 @@ const styles = StyleSheet.create({
     // paddingHorizontal: 10,
     // paddingVertical: 4,
     borderRadius: 6,
-    width:30,
-    height:27,
-    justifyContent:'center',
-    alignItems:'center',
-    borderWidth:0.5,
-    borderColor:'#ccc'
-
+    width: 30,
+    height: 27,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 0.5,
+    borderColor: '#ccc',
   },
   btnText: {
     color: '#000',

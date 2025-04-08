@@ -1,5 +1,5 @@
 import Icon from 'react-native-vector-icons/Feather';
-import { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs';
+import {BottomTabNavigationOptions} from '@react-navigation/bottom-tabs';
 import React from 'react';
 
 export const tabOptions: BottomTabNavigationOptions = {
@@ -16,12 +16,15 @@ export const tabOptions: BottomTabNavigationOptions = {
   },
 };
 
-export const getTabBarIcon = (iconName: string, color: string): (() => React.ReactNode) => {
-  return () => React.createElement(Icon, { name: iconName, size: 22, color });
+export const getTabBarIcon = (
+  iconName: string,
+  color: string,
+): (() => React.ReactNode) => {
+  return () => React.createElement(Icon, {name: iconName, size: 22, color});
 };
 
 export const getTabScreenOptions = (iconName: string) => ({
-  tabBarIcon: ({ focused }: { focused: boolean }) =>
+  tabBarIcon: ({focused}: {focused: boolean}) =>
     React.createElement(Icon, {
       name: iconName,
       size: 22,

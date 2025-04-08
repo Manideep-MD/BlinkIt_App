@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
   tabContainer: {
@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
     color: '#FFD700',
     fontWeight: 'bold',
   },
+  emptyCart: {flexDirection: 'row', alignItems: 'center'},
 });
 
 export default styles;

@@ -14,7 +14,6 @@ const Stack = createStackNavigator();
 const AppNavigation = () => {
   const token = useSelector((state: any) => state?.auth?.loginToken);
 
-  console.log(token,"toooooooooooooook")
 
   return (
     <NavigationContainer>
