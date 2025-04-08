@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "207087079885",
+    "project_id": "blinkitapp-e801a",
+    "storage_bucket": "blinkitapp-e801a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:207087079885:android:1fdb532b4bbc09d46bf484",
+        "android_client_info": {
+          "package_name": "com.blinkitapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCozfzwDVjFzILYcGJrx1_rhHxiuW3Kh38"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
